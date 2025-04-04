@@ -6,7 +6,8 @@ import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { MessageSquare, Mic, Video } from 'lucide-react';
+import { MessageSquare, Mic, Video, Calendar, Clock, User, Shield } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const Index = () => {
   return (
@@ -82,8 +83,98 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Testimonials Section (Placeholder) */}
-        <section className="py-16 bg-white">
+        {/* Connect with Doctor Section */}
+        <section id="connect-doctor" className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl font-bold text-medical-text mb-4">Connect with a Doctor</h2>
+              <p className="text-gray-600 mb-6">
+                After your AI consultation, speak directly with a healthcare professional for personalized care.
+              </p>
+              <div className="flex justify-center mb-8">
+                <Shield className="h-6 w-6 text-medical-primary mr-2" />
+                <span className="text-sm text-gray-600">All your conversations are confidential and secure with our platform.</span>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <Card className="shadow-md hover:shadow-lg transition-all">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="bg-medical-light p-3 rounded-full">
+                      <Calendar className="h-6 w-6 text-medical-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-xl">Schedule an Appointment</h3>
+                      <p className="text-sm text-gray-600">Book a consultation at your convenience</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-2 mb-6">
+                    <li className="flex items-start gap-2">
+                      <div className="mt-1 h-4 w-4 rounded-full bg-medical-primary flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm">Choose from available time slots</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="mt-1 h-4 w-4 rounded-full bg-medical-primary flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm">Receive appointment confirmation</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="mt-1 h-4 w-4 rounded-full bg-medical-primary flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm">Get reminders before your appointment</span>
+                    </li>
+                  </ul>
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <div className="flex items-center">
+                      <Clock className="h-4 w-4 mr-1" />
+                      <span>30-60 min consultation</span>
+                    </div>
+                    <div>Available 24/7</div>
+                  </div>
+                  <Button className="w-full">Book Appointment</Button>
+                </CardContent>
+              </Card>
+              
+              <Card className="shadow-md hover:shadow-lg transition-all">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="bg-medical-light p-3 rounded-full">
+                      <Video className="h-6 w-6 text-medical-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-xl">Connect Now</h3>
+                      <p className="text-sm text-gray-600">Speak with an available doctor immediately</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-2 mb-6">
+                    <li className="flex items-start gap-2">
+                      <div className="mt-1 h-4 w-4 rounded-full bg-medical-primary flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm">No appointment needed</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="mt-1 h-4 w-4 rounded-full bg-medical-primary flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm">Connect via video or voice call</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="mt-1 h-4 w-4 rounded-full bg-medical-primary flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm">Share your AI consultation results</span>
+                    </li>
+                  </ul>
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <div className="flex items-center">
+                      <Clock className="h-4 w-4 mr-1" />
+                      <span>15-30 min typical wait time</span>
+                    </div>
+                    <div>8 AM - 10 PM</div>
+                  </div>
+                  <Button className="w-full">Connect Now</Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+        
+        {/* Testimonials Section */}
+        <section className="py-16 bg-medical-light">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-3xl font-bold text-medical-text mb-4">Trusted by Patients</h2>
@@ -93,7 +184,7 @@ const Index = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-medical-light p-6 rounded-xl">
+              <div className="bg-white p-6 rounded-xl shadow-sm">
                 <div className="flex items-center space-x-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
@@ -105,7 +196,7 @@ const Index = () => {
                 <p className="font-semibold">- Sarah L.</p>
               </div>
               
-              <div className="bg-medical-light p-6 rounded-xl">
+              <div className="bg-white p-6 rounded-xl shadow-sm">
                 <div className="flex items-center space-x-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
@@ -117,7 +208,7 @@ const Index = () => {
                 <p className="font-semibold">- Michael T.</p>
               </div>
               
-              <div className="bg-medical-light p-6 rounded-xl">
+              <div className="bg-white p-6 rounded-xl shadow-sm">
                 <div className="flex items-center space-x-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
@@ -128,6 +219,12 @@ const Index = () => {
                 <p className="text-gray-600 italic mb-4">"The voice recognition feature is so convenient. I could explain my symptoms while resting in bed, and got helpful advice right away."</p>
                 <p className="font-semibold">- Jennifer K.</p>
               </div>
+            </div>
+            
+            <div className="mt-12 text-center">
+              <Button asChild>
+                <Link to="/chat">Experience MediBot Now</Link>
+              </Button>
             </div>
           </div>
         </section>

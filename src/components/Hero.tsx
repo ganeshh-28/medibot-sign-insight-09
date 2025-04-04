@@ -2,7 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Mic, MessageSquare, Video, Sparkles } from 'lucide-react';
+import { Mic, MessageSquare, Video, Sparkles, Calendar, User, Shield } from 'lucide-react';
+import ChatbotPreview from './ChatbotPreview';
 
 const Hero = () => {
   return (
@@ -18,11 +19,17 @@ const Hero = () => {
               providing instant medical insights and consultation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" asChild>
-                <Link to="/chat">Start Consultation</Link>
+              <Button size="lg" asChild className="flex items-center gap-2">
+                <Link to="/chat">
+                  <MessageSquare className="h-5 w-5" />
+                  Start Consultation
+                </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/features">Learn More</Link>
+              <Button size="lg" variant="outline" asChild className="flex items-center gap-2">
+                <Link to="#connect-doctor">
+                  <User className="h-5 w-5" />
+                  Connect with a Doctor
+                </Link>
               </Button>
             </div>
             
@@ -50,17 +57,7 @@ const Hero = () => {
             <div className="relative w-full max-w-md">
               <div className="absolute -top-6 -left-6 w-24 h-24 bg-medical-primary rounded-full opacity-20"></div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-medical-secondary rounded-full opacity-20"></div>
-              <div className="relative bg-white p-6 rounded-xl shadow-lg animate-pulse-slow">
-                <img
-                  src="/lovable-uploads/1dfc3be4-f3e5-4a33-8d5f-c044a8079dee.png"
-                  alt="Input keywords table for patient gestures"
-                  className="w-full rounded-lg"
-                />
-                <div className="mt-4 text-center">
-                  <h3 className="font-semibold text-medical-text">Symptom Recognition Table</h3>
-                  <p className="text-sm text-gray-500">Our AI understands your symptoms</p>
-                </div>
-              </div>
+              <ChatbotPreview />
             </div>
           </div>
         </div>
