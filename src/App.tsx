@@ -13,6 +13,9 @@ import NotFound from "./pages/NotFound";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import PatientDashboard from "./pages/PatientDashboard";
 import HelpSupport from "./pages/HelpSupport";
+import DoctorView from "./pages/VideoConsultation/DoctorView";
+import PatientView from "./pages/VideoConsultation/PatientView";
+import { ConsultationProvider } from "./context/ConsultationContext";
 
 const queryClient = new QueryClient();
 
@@ -21,19 +24,23 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/doctordashboard" element={<DoctorDashboard />} />
-          <Route path="/patientdashboard" element={<PatientDashboard />} />
-          <Route path="/help-support" element={<HelpSupport />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <ConsultationProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/doctordashboard" element={<DoctorDashboard />} />
+            <Route path="/patientdashboard" element={<PatientDashboard />} />
+            <Route path="/help-support" element={<HelpSupport />} />
+            <Route path="/video-consultation/doctor" element={<DoctorView />} />
+            <Route path="/video-consultation/patient" element={<PatientView />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </ConsultationProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
