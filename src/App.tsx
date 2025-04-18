@@ -35,8 +35,8 @@ const App = () => (
             <Route path="/doctordashboard" element={<DoctorDashboard />} />
             <Route path="/patientdashboard" element={<PatientDashboard />} />
             <Route path="/help-support" element={<HelpSupport />} />
-            <Route path="/video-consultation/doctor" element={<DoctorView />} />
-            <Route path="/video-consultation/patient" element={<PatientView />} />
+            <Route path="video-consultation/doctor" element={<DoctorView />} />
+            <Route path="video-consultation/patient" element={<PatientView />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
