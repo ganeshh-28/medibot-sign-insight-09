@@ -10,6 +10,9 @@ import Features from "./pages/Features";
 import Contact from "./pages/Contact";
 import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
+import DoctorDashboard from "./pages/DoctorDashboard";
+import PatientDashboard from "./pages/PatientDashboard";
+import HelpSupport from "./pages/HelpSupport";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +28,9 @@ const App = () => (
           <Route path="/features" element={<Features />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/doctordashboard" element={<DoctorDashboard />} />
+          <Route path="/patientdashboard" element={<PatientDashboard />} />
+          <Route path="/help-support" element={<HelpSupport />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

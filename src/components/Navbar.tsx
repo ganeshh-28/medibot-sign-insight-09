@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Stethoscope, Menu, X } from 'lucide-react';
+import { Stethoscope, Menu, X, UserCircle, HelpCircle } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 
@@ -46,9 +46,30 @@ const Navbar = () => {
           >
             Contact
           </Link>
-          <Button>
-            <Link to="/chat">Start Consultation</Link>
-          </Button>
+          <Link 
+            to="/help-support" 
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            <HelpCircle className="h-4 w-4 inline mr-1" />
+            Help
+          </Link>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" asChild>
+              <Link to="/doctordashboard">
+                <UserCircle className="h-4 w-4 mr-1" />
+                Doctor Portal
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/patientdashboard">
+                <UserCircle className="h-4 w-4 mr-1" />
+                Patient Portal
+              </Link>
+            </Button>
+            <Button>
+              <Link to="/chat">Start Consultation</Link>
+            </Button>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -96,6 +117,30 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             Contact
+          </Link>
+          <Link 
+            to="/help-support" 
+            className="text-base font-medium hover:text-primary py-2"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <HelpCircle className="h-4 w-4 inline mr-1" />
+            Help & Support
+          </Link>
+          <Link 
+            to="/doctordashboard" 
+            className="text-base font-medium hover:text-primary py-2"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <UserCircle className="h-4 w-4 inline mr-1" />
+            Doctor Portal
+          </Link>
+          <Link 
+            to="/patientdashboard" 
+            className="text-base font-medium hover:text-primary py-2"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <UserCircle className="h-4 w-4 inline mr-1" />
+            Patient Portal
           </Link>
           <Button className="w-full" onClick={() => setIsMenuOpen(false)}>
             <Link to="/chat" className="w-full text-center">Start Consultation</Link>
