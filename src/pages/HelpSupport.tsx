@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -9,35 +9,6 @@ import FileUpload from '@/components/help/FileUpload';
 import ContactSupport from '@/components/help/ContactSupport';
 
 const HelpSupport = () => {
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadComplete, setUploadComplete] = useState(false);
-
-  const handleFileChange = (newFiles: File[]) => {
-    setUploadedFiles(prev => [...prev, ...newFiles]);
-  };
-
-  const handleUpload = () => {
-    if (uploadedFiles.length === 0) return;
-    
-    setIsUploading(true);
-    
-    // Simulate upload process
-    setTimeout(() => {
-      setIsUploading(false);
-      setUploadComplete(true);
-      
-      // Reset after showing success message
-      setTimeout(() => {
-        setUploadComplete(false);
-      }, 3000);
-    }, 2000);
-  };
-
-  const clearFiles = () => {
-    setUploadedFiles([]);
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -65,14 +36,7 @@ const HelpSupport = () => {
           </TabsContent>
           
           <TabsContent value="upload" className="mt-4">
-            <FileUpload
-              onFileChange={handleFileChange}
-              uploadedFiles={uploadedFiles}
-              isUploading={isUploading}
-              uploadComplete={uploadComplete}
-              onUpload={handleUpload}
-              onClear={clearFiles}
-            />
+            <FileUpload />
           </TabsContent>
           
           <TabsContent value="contact" className="mt-4">

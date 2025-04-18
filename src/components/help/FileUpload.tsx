@@ -1,30 +1,22 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Upload, FileImage, Info, AlertCircle } from 'lucide-react';
+import { useFileUpload } from '@/hooks/useFileUpload';
 
-interface FileUploadProps {
-  onFileChange: (files: File[]) => void;
-  uploadedFiles: File[];
-  isUploading: boolean;
-  uploadComplete: boolean;
-  onUpload: () => void;
-  onClear: () => void;
-}
+const FileUpload = () => {
+  const {
+    uploadedFiles,
+    isUploading,
+    uploadComplete,
+    handleFileChange,
+    handleUpload,
+    clearFiles
+  } = useFileUpload();
 
-const FileUpload = ({
-  onFileChange,
-  uploadedFiles,
-  isUploading,
-  uploadComplete,
-  onUpload,
-  onClear,
-}: FileUploadProps) => {
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const newFiles = Array.from(e.target.files);
-      onFileChange(newFiles);
+      handleFileChange(Array.from(e.target.files));
     }
   };
 
@@ -47,17 +39,15 @@ const FileUpload = ({
           <p className="text-lg font-medium mb-2">Drag and drop files here</p>
           <p className="text-gray-500 mb-4">or</p>
           <div>
-            <label htmlFor="file-upload">
-              <Button asChild>
-                <span>Browse Files</span>
-              </Button>
-            </label>
+            <Button asChild>
+              <label htmlFor="file-upload">Browse Files</label>
+            </Button>
             <input
               id="file-upload"
               type="file"
               multiple
               accept="image/*"
-              onChange={handleFileChange}
+              onChange={onFileInputChange}
               className="hidden"
             />
           </div>
@@ -79,10 +69,10 @@ const FileUpload = ({
             </div>
             
             <div className="flex gap-3 mt-4">
-              <Button onClick={onUpload} disabled={isUploading}>
+              <Button onClick={handleUpload} disabled={isUploading}>
                 {isUploading ? 'Uploading...' : 'Upload Files'}
               </Button>
-              <Button variant="outline" onClick={onClear}>
+              <Button variant="outline" onClick={clearFiles}>
                 Clear
               </Button>
             </div>
