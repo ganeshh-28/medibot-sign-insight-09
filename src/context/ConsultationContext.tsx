@@ -53,14 +53,7 @@ export const ConsultationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }));
 
     if (isSignLanguage && sender === 'patient') {
-      setTimeout(() => {
-        sendMessage(
-          `Sign language recognized: "${text}". How can I help with this?`, 
-          'doctor', 
-          false, 
-          false
-        );
-      }, 1500);
+      
     }
   };
 
