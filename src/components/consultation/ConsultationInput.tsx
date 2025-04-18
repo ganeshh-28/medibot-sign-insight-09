@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -47,17 +46,15 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
   const handleSignDetection = () => {
     setIsDetectingSign(true);
     
-    // Simulate sign language detection (in a real app, this would use computer vision)
+    // Simulate sign language detection with predefined health-related messages
+    const healthSigns = [
+      "I am experiencing fever",
+      "I am having stomach pain",
+      "I am having headache"
+    ];
+    
     setTimeout(() => {
-      const possibleSigns = [
-        "I have pain",
-        "I feel dizzy",
-        "I need water",
-        "I'm feeling better",
-        "I need help"
-      ];
-      
-      const detectedSign = possibleSigns[Math.floor(Math.random() * possibleSigns.length)];
+      const detectedSign = healthSigns[Math.floor(Math.random() * healthSigns.length)];
       sendMessage(detectedSign, userRole, false, true);
       setIsDetectingSign(false);
     }, 2000);
