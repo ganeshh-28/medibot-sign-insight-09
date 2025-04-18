@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -226,8 +225,12 @@ const HelpSupport = () => {
                   <Upload className="h-12 w-12 mx-auto text-gray-400 mb-4" />
                   <p className="text-lg font-medium mb-2">Drag and drop files here</p>
                   <p className="text-gray-500 mb-4">or</p>
-                  <Button as="label" htmlFor="file-upload">
-                    Browse Files
+                  <div>
+                    <label htmlFor="file-upload">
+                      <Button asChild>
+                        <span>Browse Files</span>
+                      </Button>
+                    </label>
                     <input
                       id="file-upload"
                       type="file"
@@ -236,7 +239,7 @@ const HelpSupport = () => {
                       onChange={handleFileChange}
                       className="hidden"
                     />
-                  </Button>
+                  </div>
                 </div>
                 
                 {uploadedFiles.length > 0 && (
