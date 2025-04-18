@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Message, ConsultationState, FileAttachment } from '@/types/consultation';
 
@@ -51,10 +51,6 @@ export const ConsultationProvider: React.FC<{ children: React.ReactNode }> = ({ 
       ...prev,
       messages: [...prev.messages, newMessage],
     }));
-
-    if (isSignLanguage && sender === 'patient') {
-      
-    }
   };
 
   const uploadFile = (file: File, sender: 'doctor' | 'patient') => {
@@ -78,13 +74,6 @@ export const ConsultationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     setState(prev => ({
       ...prev,
       messages: [...prev.messages, newMessage],
-    }));
-  };
-
-  const toggleMic = () => {
-    setState(prev => ({
-      ...prev,
-      isMicActive: !prev.isMicActive,
     }));
   };
 
@@ -113,28 +102,12 @@ export const ConsultationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     sendMessage("Consultation has ended", "system");
   };
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    
-    if (state.isConnected && state.isMicActive) {
-      interval = setInterval(() => {
-        const doctorPhrases = [
-          "Could you tell me more about your symptoms?",
-          "How long have you been experiencing this?",
-          "I see. That's important information.",
-          "Let me check your previous records.",
-          "Based on what you're describing, it could be...",
-        ];
-        
-        const randomPhrase = doctorPhrases[Math.floor(Math.random() * doctorPhrases.length)];
-        sendMessage(randomPhrase, 'doctor', true);
-      }, 10000);
-    }
-    
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [state.isConnected, state.isMicActive]);
+  const toggleMic = () => {
+    setState(prev => ({
+      ...prev,
+      isMicActive: !prev.isMicActive,
+    }));
+  };
 
   return (
     <ConsultationContext.Provider 

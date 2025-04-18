@@ -2,18 +2,29 @@ import React, { useState, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useConsultation } from '@/context/ConsultationContext';
-import { Send, Upload, Mic, MicOff, Video, VideoOff, HandMetal } from 'lucide-react';
+import { Send, Upload, Mic, Video, VideoOff, HandMetal } from 'lucide-react';
+import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
 
 interface ConsultationInputProps {
   userRole: 'doctor' | 'patient';
 }
 
 const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
-  const { state, sendMessage, uploadFile, toggleMic, toggleCamera } = useConsultation();
+  const { state, sendMessage, uploadFile, toggleCamera } = useConsultation();
   const [messageText, setMessageText] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDetectingSign, setIsDetectingSign] = useState(false);
-  
+
+  const handleSpeechTranscript = (text: string) => {
+    if (text.trim()) {
+      sendMessage(text.trim(), userRole, true);
+    }
+  };
+
+  const { isListening, toggleListening, isSupported } = useSpeechRecognition({
+    onTranscript: handleSpeechTranscript
+  });
+
   const handleSendMessage = () => {
     if (messageText.trim()) {
       sendMessage(messageText, userRole);
@@ -46,7 +57,6 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
   const handleSignDetection = () => {
     setIsDetectingSign(true);
     
-    // Simulate sign language detection with predefined health-related messages
     const healthSigns = [
       "I am experiencing fever",
       "I am having stomach pain",
@@ -63,15 +73,18 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
   return (
     <div className="border rounded-lg p-3 bg-card">
       <div className="flex mb-3">
-        <Button 
-          variant={state.isMicActive ? "default" : "outline"}
-          size="sm"
-          className="mr-2"
-          onClick={toggleMic}
-        >
-          {state.isMicActive ? <MicOff size={16} className="mr-1" /> : <Mic size={16} className="mr-1" />}
-          {state.isMicActive ? "Mute" : "Unmute"}
-        </Button>
+        {userRole === 'doctor' && (
+          <Button 
+            variant={isListening ? "default" : "outline"}
+            size="sm"
+            className="mr-2"
+            onClick={toggleListening}
+            disabled={!isSupported}
+          >
+            <Mic size={16} className="mr-1" />
+            {isListening ? "Speaking..." : "Speak"}
+          </Button>
+        )}
         
         <Button 
           variant={state.isCameraActive ? "default" : "outline"}
@@ -134,9 +147,9 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
         className="hidden"
       />
       
-      {userRole === 'doctor' && state.isMicActive && (
+      {userRole === 'doctor' && isListening && (
         <div className="mt-2 text-xs text-muted-foreground">
-          <span className="text-green-500">●</span> Voice transcription is active
+          <span className="text-green-500">●</span> Speech recognition is active
         </div>
       )}
       
