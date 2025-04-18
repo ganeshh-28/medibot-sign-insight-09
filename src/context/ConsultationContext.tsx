@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Message, ConsultationState, FileAttachment } from '@/types/consultation';
@@ -33,9 +32,6 @@ export const useConsultation = () => {
 export const ConsultationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<ConsultationState>(initialState);
 
-  // In a real app, this would use WebSockets or a real-time database
-  // For demo purposes, we're just using local state that's shared between components
-
   const sendMessage = (
     text: string, 
     sender: 'doctor' | 'patient' | 'system',
@@ -56,7 +52,6 @@ export const ConsultationProvider: React.FC<{ children: React.ReactNode }> = ({ 
       messages: [...prev.messages, newMessage],
     }));
 
-    // Simulate AI response for sign language
     if (isSignLanguage && sender === 'patient') {
       setTimeout(() => {
         sendMessage(
@@ -70,8 +65,6 @@ export const ConsultationProvider: React.FC<{ children: React.ReactNode }> = ({ 
   };
 
   const uploadFile = (file: File, sender: 'doctor' | 'patient') => {
-    // In a real app, this would upload to a server
-    // For demo purposes, we're creating a fake URL
     const fakeUrl = URL.createObjectURL(file);
     
     const fileAttachment: FileAttachment = {
@@ -127,12 +120,10 @@ export const ConsultationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     sendMessage("Consultation has ended", "system");
   };
 
-  // Simulated speech recognition for demo purposes
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
     
     if (state.isConnected && state.isMicActive) {
-      // Simulate doctor speaking periodically when mic is active
       interval = setInterval(() => {
         const doctorPhrases = [
           "Could you tell me more about your symptoms?",
@@ -144,7 +135,7 @@ export const ConsultationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         
         const randomPhrase = doctorPhrases[Math.floor(Math.random() * doctorPhrases.length)];
         sendMessage(randomPhrase, 'doctor', true);
-      }, 10000); // Every 10 seconds
+      }, 10000);
     }
     
     return () => {
