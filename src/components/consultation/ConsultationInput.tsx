@@ -1,8 +1,9 @@
+
 import React, { useState, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useConsultation } from '@/context/ConsultationContext';
-import { Send, Upload, Video, VideoOff, HandMetal } from 'lucide-react';
+import { Send, Upload, Video, VideoOff, HandMetal, Mic } from 'lucide-react';
 
 interface ConsultationInputProps {
   userRole: 'doctor' | 'patient';
@@ -13,6 +14,7 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
   const [messageText, setMessageText] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDetectingSign, setIsDetectingSign] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   const handleSendMessage = () => {
     if (messageText.trim()) {
@@ -43,6 +45,11 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
     fileInputRef.current?.click();
   };
 
+  const toggleSpeaking = () => {
+    setIsSpeaking(!isSpeaking);
+    // No actual functionality - placeholder only
+  };
+
   const handleSignDetection = () => {
     setIsDetectingSign(true);
     
@@ -57,14 +64,13 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
       <div className="flex mb-3">
         {userRole === 'doctor' && (
           <Button 
-            variant={isListening ? "default" : "outline"}
+            variant={isSpeaking ? "default" : "outline"}
             size="sm"
             className="mr-2"
-            onClick={toggleListening}
-            disabled={!isSupported}
+            onClick={toggleSpeaking}
           >
             <Mic size={16} className="mr-1" />
-            {isListening ? "Speaking..." : "Speak"}
+            {isSpeaking ? "Speaking..." : "Speak"}
           </Button>
         )}
         
@@ -129,7 +135,7 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
         className="hidden"
       />
       
-      {userRole === 'doctor' && isListening && (
+      {userRole === 'doctor' && isSpeaking && (
         <div className="mt-2 text-xs text-muted-foreground">
           <span className="text-green-500">●</span> Speech recognition is active
         </div>
