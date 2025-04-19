@@ -2,8 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useConsultation } from '@/context/ConsultationContext';
-import { Send, Upload, Mic, Video, VideoOff, HandMetal } from 'lucide-react';
-import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
+import { Send, Upload, Video, VideoOff, HandMetal } from 'lucide-react';
 
 interface ConsultationInputProps {
   userRole: 'doctor' | 'patient';
@@ -14,16 +13,6 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
   const [messageText, setMessageText] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDetectingSign, setIsDetectingSign] = useState(false);
-
-  const handleSpeechTranscript = (text: string) => {
-    if (text.trim()) {
-      sendMessage(text.trim(), userRole, true);
-    }
-  };
-
-  const { isListening, toggleListening, isSupported } = useSpeechRecognition({
-    onTranscript: handleSpeechTranscript
-  });
 
   const handleSendMessage = () => {
     if (messageText.trim()) {
@@ -57,15 +46,8 @@ const ConsultationInput: React.FC<ConsultationInputProps> = ({ userRole }) => {
   const handleSignDetection = () => {
     setIsDetectingSign(true);
     
-    const healthSigns = [
-      "I am experiencing fever",
-      "I am having stomach pain",
-      "I am having headache"
-    ];
-    
     setTimeout(() => {
-      const detectedSign = healthSigns[Math.floor(Math.random() * healthSigns.length)];
-      sendMessage(detectedSign, userRole, false, true);
+      sendMessage("I am experiencing fever", userRole, false, true);
       setIsDetectingSign(false);
     }, 2000);
   };
