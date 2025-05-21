@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Stethoscope, Menu, X, UserCircle, HelpCircle, Video } from 'lucide-react';
+import { Stethoscope, Menu, X, UserCircle, HelpCircle, Video, LogIn } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 
@@ -42,7 +42,6 @@ const Navbar = () => {
           </Link>
           <Link 
             to="/contact"
-
             className="text-sm font-medium hover:text-primary transition-colors"
           >
             Contact
@@ -71,6 +70,12 @@ const Navbar = () => {
               <Link to="/video-consultation/doctor">
                 <Video className="h-4 w-4 mr-1" />
                 Video Consult
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/login">
+                <LogIn className="h-4 w-4 mr-1" />
+                Login
               </Link>
             </Button>
             <Button>
@@ -132,6 +137,22 @@ const Navbar = () => {
           >
             <HelpCircle className="h-4 w-4 inline mr-1" />
             Help & Support
+          </Link>
+          <Link 
+            to="/login" 
+            className="text-base font-medium hover:text-primary py-2"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <LogIn className="h-4 w-4 inline mr-1" />
+            Login
+          </Link>
+          <Link 
+            to="/signup" 
+            className="text-base font-medium hover:text-primary py-2"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <UserCircle className="h-4 w-4 inline mr-1" />
+            Sign Up
           </Link>
           <Link 
             to="/doctordashboard" 

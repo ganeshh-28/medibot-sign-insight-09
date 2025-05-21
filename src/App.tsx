@@ -15,6 +15,8 @@ import PatientDashboard from "./pages/PatientDashboard";
 import HelpSupport from "./pages/HelpSupport";
 import DoctorView from "./pages/VideoConsultation/DoctorView";
 import PatientView from "./pages/VideoConsultation/PatientView";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
 import { ConsultationProvider } from "./context/ConsultationContext";
 
 const queryClient = new QueryClient();
@@ -37,6 +39,8 @@ const App = () => (
             <Route path="/help-support" element={<HelpSupport />} />
             <Route path="video-consultation/doctor" element={<DoctorView />} />
             <Route path="video-consultation/patient" element={<PatientView />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
